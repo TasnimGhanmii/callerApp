@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#F5F5F5"
+    android:layoutAnimation="@anim/layout_animation_fade_in"
+    tools:context=".Acceuil"
+    tools:ignore="UnusedAttribute">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvuser_acc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Acceuil"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#E91E63"
+        android:fontFamily="sans-serif-medium"
+        android:paddingVertical="16dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- CardView Container -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        android:layout_marginHorizontal="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Ajouter -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnajout_acc"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter"
+                app:icon="@drawable/ic_add"
+                app:iconTint="#C2185B"
+                app:iconGravity="start"
+                android:layout_marginBottom="12dp"
+                app:cornerRadius="12dp"
+                app:backgroundTint="#FFCDD2"
+                android:textColor="#C2185B"
+                android:fontFamily="sans-serif-medium"
+                android:insetTop="12dp"
+                android:insetBottom="12dp" />
+
+            <!-- Affichage -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnaff_acc"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Affichage"
+                app:icon="@drawable/ic_view_list"
+                app:iconGravity="start"
+                app:iconTint="#0686FD"
+                android:layout_marginBottom="12dp"
+                app:cornerRadius="12dp"
+                app:backgroundTint="#BBDEFB"
+                android:textColor="#1565C0"
+                android:fontFamily="sans-serif-medium"
+                android:insetTop="12dp"
+                android:insetBottom="12dp" />
+
+            <!-- Déconnecter -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dec_acceuil"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Déconnecter"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="start"
+                app:iconTint="#0FDC01"
+                android:layout_marginBottom="16dp"
+                app:cornerRadius="12dp"
+                app:backgroundTint="#E8F5E8"
+                android:textColor="#2E7D32"
+                android:fontFamily="sans-serif-medium"
+                android:insetTop="12dp"
+                android:insetBottom="12dp" />
+
+            <!-- Quitter -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/qte_acc"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quitter"
+                app:icon="@drawable/ic_exit_to_app"
+                app:iconGravity="start"
+                app:cornerRadius="12dp"
+                app:strokeColor="#9E9E9E"
+                app:strokeWidth="1.5dp"
+                android:textColor="#555555"
+                android:fontFamily="sans-serif-medium"
+                android:insetTop="12dp"
+                android:insetBottom="12dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
