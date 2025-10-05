@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
     tools:context=".Affiche">
 
+    <!-- Page Title -->
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List"
+        android:text="Contact List"
+        android:textSize="32sp"
+        android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="40dp" />
+        android:layout_marginBottom="24dp" />
 
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_gravity="start"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="16dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white" />
+
+    <!-- Search View -->
     <SearchView
         android:id="@+id/search_ajout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:queryHint="Search contacts..." />
 
+    <!-- ListView to Display Contacts -->
     <ListView
         android:id="@+id/list_affiche"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </LinearLayout>
