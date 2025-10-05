@@ -51,7 +51,7 @@ public class Ajout extends AppCompatActivity {
                 Contact c=new Contact(name,psd,phone);
                 Acceuil.liste_contact.add(c);
 
-                Toast.makeText(Ajout.this, "successtasnim", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Ajout.this, "Contact added successefully!", Toast.LENGTH_SHORT).show();
 
             }
         });

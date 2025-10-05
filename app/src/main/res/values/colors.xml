@@ -6,4 +6,17 @@
     <color name="arriereplan">#CDDC39</color>
     <color name="teal_200">#03DAC5</color>
     <color name="gray">#BDBDBD</color>
+    <color name="color_letter_1">#FF5252</color> <!-- Red -->
+    <color name="color_letter_2">#FF9800</color> <!-- Orange -->
+    <color name="color_letter_3">#FFC107</color> <!-- Amber -->
+    <color name="color_letter_4">#4CAF50</color> <!-- Green -->
+    <color name="color_letter_5">#2196F3</color> <!-- Blue -->
+    <color name="color_letter_6">#3F51B5</color> <!-- Indigo -->
+    <color name="color_letter_7">#9C27B0</color> <!-- Purple -->
+    <color name="color_letter_8">#E91E63</color> <!-- Pink -->
+    <color name="color_letter_9">#00BCD4</color> <!-- Cyan -->
+    <color name="color_letter_10">#8BC34A</color> <!-- Light Green -->
+    <color name="color_letter_11">#FFEB3B</color> <!-- Yellow -->
+    <color name="color_letter_12">#795548</color> <!-- Brown -->
+    <color name="color_letter_13">#607D8B</color> <!-- Blue Grey -->
 </resources>
