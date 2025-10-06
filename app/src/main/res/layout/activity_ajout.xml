@@ -36,13 +36,14 @@
         android:layout_marginBottom="16dp"
         app:boxStrokeColor="#E91E63"
         app:hintTextColor="#E91E63">
-
+                                               <!--This is just a special version of EditText that is designed to work inside-->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nom_ajout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:maxLines="1" />
+                                               <!--wrapper view: provides material design (lable floatin anim..)-->
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- pseudo input -->
@@ -71,7 +72,7 @@
         android:hint="Phone number"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="32dp"
-        app:prefixText="+212"
+        app:prefixText="+216"
         app:counterEnabled="true"
         app:counterMaxLength="10"
         app:boxStrokeColor="#E91E63"
