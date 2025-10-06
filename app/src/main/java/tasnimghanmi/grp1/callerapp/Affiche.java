@@ -31,12 +31,14 @@ public class Affiche extends AppCompatActivity {
 
         // Set up adapter
         adapter = new CustomContactAdapter(this, Acceuil.liste_contact);
+        //attaches the adapter to the ListView so it can display contacts.
         list.setAdapter(adapter);
 
         // Back button
         btnBack.setOnClickListener(v -> finish());
 
         // On contact click → open detail activity
+        //adds listner for clicks on the elements
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
