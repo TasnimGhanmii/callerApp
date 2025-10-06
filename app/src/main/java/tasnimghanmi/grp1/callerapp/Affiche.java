@@ -51,18 +51,8 @@ public class Affiche extends AppCompatActivity {
             }
         });
 
-        // Optional: Search functionality
-        /*
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) { return false; }
+        //recherche
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        */
+
     }
 }
