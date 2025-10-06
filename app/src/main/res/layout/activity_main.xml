@@ -11,7 +11,7 @@
     android:background="@drawable/bg_gradient"
     tools:context=".MainActivity">
 
-    <!-- Card containing the login form -->
+    <!-- card container-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         app:cardElevation="8dp"
         android:backgroundTint="@android:color/white">
 
-        <!-- Animated container for form elements -->
+        <!-- animated container for form elements -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

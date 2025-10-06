@@ -3,3 +3,4 @@
     android:duration="600"
     android:fromAlpha="0.0"
     android:toAlpha="1.0" />
+<!-- alpha controls transparency level-->

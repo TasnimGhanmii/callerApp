@@ -32,25 +32,28 @@ public class ContactDetailActivity extends AppCompatActivity {
         String pseudo = intent.getStringExtra("PSEUDO");
         String phone = intent.getStringExtra("PHONE");
 
-        // Handle missing phone number
+        // handle missing phone number
         if (phone == null || phone.trim().isEmpty()) {
             Toast.makeText(this, "Phone number not available", Toast.LENGTH_SHORT).show();
             phone = "";
         }
 
-        // Fill UI fields
+        // fill UI fields
         tvName.setText("Name: " + (name != null ? name : "Unknown"));
         tvPseudo.setText("Pseudo: " + (pseudo != null ? pseudo : "N/A"));
         tvPhone.setText("Phone: " + phone);
 
-        // 👇 Create a FINAL copy of phone for use in lambda
+        // 👇 final FINAL copy of phone for use in lambda
         final String finalPhone = phone.trim(); // Now it's safe to use
 
-        // CALL BUTTON: Open dialer
+        // call btn: Open dialer
         btnCall.setOnClickListener(v -> {
             if (!finalPhone.isEmpty()) {
+                //creates an Intent that tells Android I want to open the dialer app.
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                //attaches the phone to the Intent (URI="tel:1238777")
                 callIntent.setData(Uri.parse("tel:" + finalPhone));
+                //chekcs of an app installed that can handle this Intent
                 if (callIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(callIntent);
                 } else {

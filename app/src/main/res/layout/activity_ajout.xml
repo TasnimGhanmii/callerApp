@@ -12,7 +12,7 @@
     android:layoutAnimation="@anim/layout_animation_fade_in"
     tools:context=".Ajout">
 
-    <!-- Title -->
+    <!-- title -->
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_marginBottom="32dp"
         android:elevation="4dp" />
 
-    <!-- Name Input -->
+    <!-- name input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,14 +45,16 @@
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Pseudo Input -->
+    <!-- pseudo input -->
     <com.google.android.material.textfield.TextInputLayout
         
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter username"
+        android:hint="Enter Pseudo"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:boxStrokeColor="#E91E63"
+        app:hintTextColor="#E91E63">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pseudo_ajout"
@@ -62,7 +64,7 @@
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Phone Input -->
+    <!-- num input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +73,9 @@
         android:layout_marginBottom="32dp"
         app:prefixText="+212"
         app:counterEnabled="true"
-        app:counterMaxLength="10">
+        app:counterMaxLength="10"
+        app:boxStrokeColor="#E91E63"
+        app:hintTextColor="#E91E63">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tel_ajout"
@@ -82,7 +86,7 @@
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Action Buttons -->
+    <!-- buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

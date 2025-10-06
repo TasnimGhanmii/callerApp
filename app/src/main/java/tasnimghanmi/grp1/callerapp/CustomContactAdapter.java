@@ -43,6 +43,9 @@ public class CustomContactAdapter extends ArrayAdapter<Contact> {
 
     @NonNull
     @Override
+    //to get control over every row in the list => custom layout of the element
+                        //id of the item in the adapter
+                                      //reusable view=>child                  //parent (listview)
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Contact contact = getItem(position);
 
@@ -64,7 +67,6 @@ public class CustomContactAdapter extends ArrayAdapter<Contact> {
                 char firstLetter = Character.toUpperCase(name.charAt(0));
                 textLetter.setText(String.valueOf(firstLetter));
 
-                // ✅ Correct way: change drawable color, keep shape
                 GradientDrawable drawable = (GradientDrawable) textLetter.getBackground();
                 if (drawable != null) {
                     drawable.setColor(getColorForLetter(firstLetter));
@@ -79,7 +81,7 @@ public class CustomContactAdapter extends ArrayAdapter<Contact> {
             }
 
             // Pseudo
-            textPseudo.setText("@" + (contact.pseudo != null ? contact.pseudo : "no_pseudo"));
+            textPseudo.setText((contact.pseudo != null ? contact.pseudo : "no_pseudo"));
 
             // Number
             textNum.setText(contact.num != null ? contact.num : "");

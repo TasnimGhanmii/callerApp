@@ -4,3 +4,4 @@
     android:delay="0.3"
     android:animationOrder="normal"
     android:interpolator="@android:anim/decelerate_interpolator" />
+<!--layout animation controller. It defines how each child view in a ViewGroup (like rows in a ListView or children of a LinearLayout) will animate when shown.-->
