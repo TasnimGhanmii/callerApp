@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity{
         btnval=findViewById(R.id.btnval_auth);
         btnqte=findViewById(R.id.btnqte_auth);
 
+        ContactManager c=new ContactManager(this);
+        c.ouvrir();
+
         /*btnqte.setOnClickListener(this);
         btnval.setOnClickListener(this);*/
 

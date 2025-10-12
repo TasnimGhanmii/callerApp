@@ -2,12 +2,19 @@ package tasnimghanmi.grp1.callerapp;
 
 public class Contact {
     public String nom,pseudo,num;
-
+    public int id;
     public Contact() {
 
     }
 
     public Contact(String nom, String pseudo, String num) {
+        this.nom = nom;
+        this.pseudo = pseudo;
+        this.num = num;
+    }
+
+    public Contact(int id,String nom, String pseudo, String num) {
+        this.id=id;
         this.nom = nom;
         this.pseudo = pseudo;
         this.num = num;
