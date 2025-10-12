@@ -5,66 +5,62 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EditContactActivity extends AppCompatActivity {
 
-    private EditText etName, etPseudo, etPhone;
+    private EditText et_name, et_pseudo, et_phone;
     private Button btnSave, btnCancel;
-    private int position;
+    private int id;
+    private ContactManager contactManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-        etName = findViewById(R.id.et_name);
-        etPseudo = findViewById(R.id.et_pseudo);
-        etPhone = findViewById(R.id.et_phone);
+        et_name = findViewById(R.id.et_name);
+        et_pseudo = findViewById(R.id.et_pseudo);
+        et_phone = findViewById(R.id.et_phone);
         btnSave = findViewById(R.id.btn_save);
         btnCancel = findViewById(R.id.btn_cancel);
 
-        // get data
+        contactManager = new ContactManager(this);
+        contactManager.ouvrir();
+
         Intent intent = getIntent();
-        String name = intent.getStringExtra("NAME");
-        String pseudo = intent.getStringExtra("PSEUDO");
-        String phone = intent.getStringExtra("PHONE");
-        position = intent.getIntExtra("POSITION", -1);
+        id = intent.getIntExtra("ID", -1);
+        et_name.setText(intent.getStringExtra("NAME"));
+        et_pseudo.setText(intent.getStringExtra("PSEUDO"));
+        et_phone.setText(intent.getStringExtra("PHONE"));
 
-        // fill fields
-        etName.setText(name);
-        etPseudo.setText(pseudo);
-        etPhone.setText(phone);
-
-        // save
         btnSave.setOnClickListener(v -> {
-            String newName = etName.getText().toString().trim();
-            String newPseudo = etPseudo.getText().toString().trim();
-            String newPhone = etPhone.getText().toString().trim();
+            String newName = et_name.getText().toString().trim();
+            String newPseudo = et_pseudo.getText().toString().trim();
+            String newPhone = et_phone.getText().toString().trim();
 
-            if (newName.isEmpty() || newPhone.isEmpty()) {
-                Toast.makeText(this, "Name and phone cannot be empty", Toast.LENGTH_SHORT).show();
+            if (newName.isEmpty() || newPseudo.isEmpty() || newPhone.isEmpty()) {
+                Toast.makeText(this, "All fields required", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // update contact in global list
-            if (position != -1) {
-                Contact contact = Acceuil.liste_contact.get(position);
-                contact.setNom(newName);
-                contact.setPseudo(newPseudo);
-                contact.setNum(newPhone);
-            }
+            contactManager.updateContact(id, newName, newPseudo, newPhone);
+            Toast.makeText(this, "Contact updated", Toast.LENGTH_SHORT).show();
 
-            // return updated values
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("NAME", newName);
-            resultIntent.putExtra("PSEUDO", newPseudo);
-            resultIntent.putExtra("PHONE", newPhone);
-            setResult(RESULT_OK, resultIntent);
+            Intent result = new Intent();
+            result.putExtra("NAME", newName);
+            result.putExtra("PSEUDO", newPseudo);
+            result.putExtra("PHONE", newPhone);
+            setResult(RESULT_OK, result);
             finish();
         });
 
         btnCancel.setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        contactManager.fermer();
     }
 }

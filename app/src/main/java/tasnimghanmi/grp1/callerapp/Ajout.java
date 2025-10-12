@@ -16,6 +16,7 @@ public class Ajout extends AppCompatActivity {
 
     private Button btnajout, btnannuler;
     private EditText nom, pseudo, tel;
+    private ContactManager contactManager; // Database manager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,10 @@ public class Ajout extends AppCompatActivity {
         nom = findViewById(R.id.nom_ajout);
         pseudo = findViewById(R.id.pseudo_ajout);
         tel = findViewById(R.id.tel_ajout);
+
+        // Open the database
+        contactManager = new ContactManager(this);
+        contactManager.ouvrir();
 
         // Cancel button: close the activity
         btnannuler.setOnClickListener(new View.OnClickListener() {
@@ -53,20 +58,22 @@ public class Ajout extends AppCompatActivity {
                     return;
                 }
 
-                // Create new contact and add to list
-                Contact c = new Contact(name, psd, phone);
-                Acceuil.liste_contact.add(c);
+                // Add contact to the database
+                long res = contactManager.ajout(name, psd, phone);
 
-                // Show success message
-                Toast.makeText(Ajout.this, "Contact added successfully!", Toast.LENGTH_SHORT).show();
+                if (res != -1) {
+                    Toast.makeText(Ajout.this, "Contact added successfully!", Toast.LENGTH_SHORT).show();
 
-                // Clear the input fields
-                nom.setText("");
-                pseudo.setText("");
-                tel.setText("");
+                    // Clear the input fields
+                    nom.setText("");
+                    pseudo.setText("");
+                    tel.setText("");
 
-                // Optional: Reset focus to the first field
-                nom.requestFocus();
+                    // Optional: Reset focus to the first field
+                    nom.requestFocus();
+                } else {
+                    Toast.makeText(Ajout.this, "Error adding contact!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -76,5 +83,11 @@ public class Ajout extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        contactManager.fermer(); // Close DB connection properly
     }
 }
