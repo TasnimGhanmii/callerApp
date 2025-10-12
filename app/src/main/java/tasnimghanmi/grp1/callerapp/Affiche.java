@@ -1,4 +1,3 @@
-// File: Affiche.java
 package tasnimghanmi.grp1.callerapp;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,37 +22,38 @@ public class Affiche extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiche);
 
-        // Bind UI elements
         search = findViewById(R.id.search_ajout);
         list = findViewById(R.id.list_affiche);
         btnBack = findViewById(R.id.btn_back);
 
-        // Set up adapter
+        //adapter
         adapter = new CustomContactAdapter(this, Acceuil.liste_contact);
-        //attaches the adapter to the ListView so it can display contacts.
         list.setAdapter(adapter);
 
-        // Back button
         btnBack.setOnClickListener(v -> finish());
 
-        // On contact click → open detail activity
-        //adds listner for clicks on the elements
+        // on contact click → open detail activity
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contact selectedContact = Acceuil.liste_contact.get(position);
 
-                // Launch ContactDetailActivity
                 Intent intent = new Intent(Affiche.this, ContactDetailActivity.class);
                 intent.putExtra("NAME", selectedContact.getNom());
                 intent.putExtra("PSEUDO", selectedContact.getPseudo());
                 intent.putExtra("PHONE", selectedContact.getNum());
+                intent.putExtra("POSITION", position); // pass position
                 startActivity(intent);
             }
         });
+    }
 
-        //recherche
-
-
+    // refresh the list when coming back from edit or detail screens
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

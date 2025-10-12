@@ -82,7 +82,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginTop="16dp"
-                android:weightSum="2">
+                android:weightSum="3">
 
                 <!-- Call Button -->
                 <Button
@@ -95,6 +95,19 @@
                     android:textSize="16sp"
                     android:padding="12dp"
                     android:backgroundTint="#4CAF50" />
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Edit"
+                    app:icon="@drawable/ic_edit"
+                    app:iconGravity="start"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:backgroundTint="#0721F2" />
 
                 <!-- Exit Button -->
                 <Button
@@ -109,6 +122,8 @@
                     android:textSize="16sp"
                     android:padding="12dp"
                     android:backgroundTint="#D32F2F" />
+
+
             </LinearLayout>
 
         </LinearLayout>

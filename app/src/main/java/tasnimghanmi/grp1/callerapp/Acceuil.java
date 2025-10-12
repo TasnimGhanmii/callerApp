@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Acceuil extends AppCompatActivity {
     public static ArrayList<Contact> liste_contact=new ArrayList<Contact>();
-    private Button btnaff,btnajout,btnqte;
+    private Button btnaff,btnajout,btnqte,btnDecAcc;
     private TextView tvUser;
 
     @Override
@@ -27,6 +27,8 @@ public class Acceuil extends AppCompatActivity {
 
         btnaff=findViewById(R.id.btnaff_acc);
         btnajout=findViewById(R.id.btnajout_acc);
+        btnDecAcc=findViewById(R.id.dec_acceuil);
+
 
         tvUser=findViewById(R.id.tvuser_acc);
 
@@ -57,6 +59,13 @@ public class Acceuil extends AppCompatActivity {
             public void onClick(View v) {
                 Acceuil.this.finish();
             }
+        });
+
+        btnDecAcc.setOnClickListener(v->{
+
+            Intent i=new Intent(Acceuil.this,MainActivity.class);
+            startActivity(i);
+
         });
 
 

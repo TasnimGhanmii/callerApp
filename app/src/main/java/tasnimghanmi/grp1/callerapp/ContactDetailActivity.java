@@ -7,53 +7,47 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ContactDetailActivity extends AppCompatActivity {
 
     private TextView tvName, tvPseudo, tvPhone;
-    private Button btnCall, btnExit;
+    private Button btnCall, btnExit, btnEdit;
+
+    private String name, pseudo, phone;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_detail);
 
-        // Bind views
         tvName = findViewById(R.id.tv_name);
         tvPseudo = findViewById(R.id.tv_pseudo);
         tvPhone = findViewById(R.id.tv_phone);
         btnCall = findViewById(R.id.btn_call);
         btnExit = findViewById(R.id.btn_exit);
+        btnEdit = findViewById(R.id.btn_edit);
 
-        // Retrieve data from intent
         Intent intent = getIntent();
-        String name = intent.getStringExtra("NAME");
-        String pseudo = intent.getStringExtra("PSEUDO");
-        String phone = intent.getStringExtra("PHONE");
+        name = intent.getStringExtra("NAME");
+        pseudo = intent.getStringExtra("PSEUDO");
+        phone = intent.getStringExtra("PHONE");
+        position = intent.getIntExtra("POSITION", -1);
 
-        // handle missing phone number
         if (phone == null || phone.trim().isEmpty()) {
             Toast.makeText(this, "Phone number not available", Toast.LENGTH_SHORT).show();
             phone = "";
         }
 
-        // fill UI fields
-        tvName.setText("Name: " + (name != null ? name : "Unknown"));
-        tvPseudo.setText("Pseudo: " + (pseudo != null ? pseudo : "N/A"));
-        tvPhone.setText("Phone: " + phone);
+        updateUI();
 
-        // 👇 final FINAL copy of phone for use in lambda
-        final String finalPhone = phone.trim(); // Now it's safe to use
-
-        // call btn: Open dialer
         btnCall.setOnClickListener(v -> {
-            if (!finalPhone.isEmpty()) {
-                //creates an Intent that tells Android I want to open the dialer app.
+            if (!phone.trim().isEmpty()) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                //attaches the phone to the Intent (URI="tel:1238777")
-                callIntent.setData(Uri.parse("tel:" + finalPhone));
-                //chekcs of an app installed that can handle this Intent
+                callIntent.setData(Uri.parse("tel:" + phone));
                 if (callIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(callIntent);
                 } else {
@@ -64,7 +58,34 @@ public class ContactDetailActivity extends AppCompatActivity {
             }
         });
 
-        // EXIT BUTTON
+        btnEdit.setOnClickListener(v -> {
+            Intent editIntent = new Intent(ContactDetailActivity.this, EditContactActivity.class);
+            editIntent.putExtra("NAME", name);
+            editIntent.putExtra("PSEUDO", pseudo);
+            editIntent.putExtra("PHONE", phone);
+            editIntent.putExtra("POSITION", position);
+            editContactLauncher.launch(editIntent);
+        });
+
         btnExit.setOnClickListener(v -> finish());
     }
+
+    private void updateUI() {
+        tvName.setText("Name: " + name);
+        tvPseudo.setText("Pseudo: " + pseudo);
+        tvPhone.setText("Phone: " + phone);
+    }
+
+    // handle edit result
+    private final ActivityResultLauncher<Intent> editContactLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    name = result.getData().getStringExtra("NAME");
+                    pseudo = result.getData().getStringExtra("PSEUDO");
+                    phone = result.getData().getStringExtra("PHONE");
+
+                    // Update UI
+                    updateUI();
+                }
+            });
 }
