@@ -43,12 +43,16 @@ public class MainActivity extends AppCompatActivity{
         btnqte=findViewById(R.id.btnqte_auth);
         cbRemember = findViewById(R.id.cb_remember);
 
-
+        //is a small key-value storage on Android used to save data like login credentials or user settings.
+                                     //names the peref file
         prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                                                 //file only accessed by this app
 
-        // Auto-login if Remember Me was checked
+        // auto-login if Remember Me was checked
+                                                            //si key doesn't exist def false
         boolean remembered = prefs.getBoolean(KEY_REMEMBER, false);
         if (remembered) {
+            //recuperer usename si non ""
             String savedUser = prefs.getString(KEY_USERNAME, "");
             Intent i = new Intent(MainActivity.this, Acceuil.class);
             i.putExtra("user", savedUser);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity{
                 if(nom.equalsIgnoreCase(("tasnim"))&&mp.equalsIgnoreCase("000"))
                 {
                     // Save preference if Remember Me checked
+                    //write or modify values inside the SharedPreferences XML file.
                     SharedPreferences.Editor editor = prefs.edit();
                     if (cbRemember.isChecked()) {
                         editor.putBoolean(KEY_REMEMBER, true);
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity{
                         editor.putBoolean(KEY_REMEMBER, false);
                         editor.remove(KEY_USERNAME);
                     }
+                    //saves your changes to the SharedPreferences XML file
                     editor.apply();
 
                     Intent i=new Intent(MainActivity.this,Acceuil.class);

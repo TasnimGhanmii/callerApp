@@ -51,6 +51,7 @@ public class EditContactActivity extends AppCompatActivity {
             result.putExtra("NAME", newName);
             result.putExtra("PSEUDO", newPseudo);
             result.putExtra("PHONE", newPhone);
+            //sends the data back to the activity that launched it via a launcher (contactdetail)
             setResult(RESULT_OK, result);
             finish();
         });

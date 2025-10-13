@@ -26,6 +26,13 @@ public class Affiche extends AppCompatActivity {
     private ArrayList<Contact> contacts;
     private ArrayList<Contact> filteredContacts;
 
+    private final ActivityResultLauncher<Intent> contactDetailLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    loadContacts(); // refresh list after editing or adding a contact
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,25 +43,28 @@ public class Affiche extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         tvEmpty = findViewById(R.id.tv_empty);
 
+        // refresh DB connection because activities are independent
         contactManager = new ContactManager(this);
         contactManager.ouvrir();
 
         loadContacts();
 
+        // Back button → return to previous screen
         btnBack.setOnClickListener(v -> finish());
 
-        // List item click → open detail activity
+        // When user clicks a contact → open detail page
         list.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
-            Contact selectedContact = filteredContacts.get(position); // use filtered list
+            Contact selectedContact = filteredContacts.get(position);
             Intent intent = new Intent(Affiche.this, ContactDetailActivity.class);
             intent.putExtra("ID", selectedContact.getId());
             intent.putExtra("NAME", selectedContact.getNom());
             intent.putExtra("PSEUDO", selectedContact.getPseudo());
             intent.putExtra("PHONE", selectedContact.getNum());
+            //aunch the detail activity so it can get a result back if something changes.
             contactDetailLauncher.launch(intent);
         });
 
-        // SEARCH VIEW
+        // handle search filtering
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -85,12 +95,14 @@ public class Affiche extends AppCompatActivity {
         }
     }
 
+    /** Filters contacts based on user query (name, pseudo, or number). */
     private void filterContacts(String query) {
         filteredContacts.clear();
+
         if (query == null || query.trim().isEmpty()) {
             filteredContacts.addAll(contacts);
         } else {
-            String lowerQuery = query.toLowerCase();
+            String lowerQuery = query.toLowerCase().trim();
             for (Contact c : contacts) {
                 if (c.getNom().toLowerCase().contains(lowerQuery)
                         || c.getPseudo().toLowerCase().contains(lowerQuery)
@@ -100,7 +112,7 @@ public class Affiche extends AppCompatActivity {
             }
         }
 
-        // Show empty text if no results
+        // Update UI depending on results
         if (filteredContacts.isEmpty()) {
             tvEmpty.setVisibility(View.VISIBLE);
             list.setVisibility(View.GONE);
@@ -111,13 +123,6 @@ public class Affiche extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
     }
-
-    private final ActivityResultLauncher<Intent> contactDetailLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    loadContacts(); // refresh after editing or adding
-                }
-            });
 
     @Override
     protected void onDestroy() {

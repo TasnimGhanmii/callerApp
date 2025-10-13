@@ -29,6 +29,7 @@ public class Acceuil extends AppCompatActivity {
         btnDec=findViewById(R.id.dec_acceuil);
 
         Intent x = this.getIntent();
+        //where all infos sent with intent
         Bundle b = x.getExtras();
         String u = b.getString("user");
         tvUser.setText("Acceuil de " + u);

@@ -70,8 +70,11 @@ public class ContactDetailActivity extends AppCompatActivity {
         tvPhone.setText("Phone: " + phone);
     }
 
+    //a modern Android API that launches another activity and receives a result back.
     private final ActivityResultLauncher<Intent> editContactLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                //When the user finishes editing and the EditContactActivity calls setResult(RESULT_OK, intent) before closing
+                //result fct successful & there is an intent carrying the data
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     name = result.getData().getStringExtra("NAME");
                     pseudo = result.getData().getStringExtra("PSEUDO");
