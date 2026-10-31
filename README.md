@@ -184,15 +184,6 @@ Calls are started with `Intent.ACTION_DIAL`, which opens the dialer for the user
 - **Search.** Filtering is done in memory over the loaded list and updates the adapter, plus the empty-state view, on every keystroke.
 - **Avatars.** `CustomContactAdapter` maps the first letter of the name to one of 18 colors and tints a circular background drawable.
 
-## Known Limitations
-
-- **Authentication is a placeholder.** The credentials are hardcoded in `MainActivity`; there is no user registration or password hashing. Fine for a demo, not for real use.
-- **No delete in the UI.** `ContactManager.supprimerContact()` exists, but no screen calls it yet.
-- **Schema upgrades are destructive.** `onUpgrade` drops and recreates the table, so bumping the DB version erases stored contacts.
-- **No duplicate or phone-format validation.** Fields are only checked for being non-empty.
-- **Disk access on the main thread.** Database calls are synchronous; fine at this scale, but they should move off the UI thread if the data grows.
-- **Test coverage is minimal.** Only the default template tests are present.
-- **UI strings are hardcoded** and mix French and English; they are not yet extracted into `strings.xml`, so there is no localization.
 
 ## Roadmap
 
